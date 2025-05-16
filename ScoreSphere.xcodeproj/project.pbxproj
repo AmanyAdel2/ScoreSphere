@@ -58,6 +58,9 @@
 		225B46102DD7049200AFFC0A /* ScoreSphere */ = {
 			isa = PBXGroup;
 			children = (
+				225B462A2DD709FB00AFFC0A /* View */,
+				225B46292DD709EE00AFFC0A /* Model */,
+				225B46282DD709DE00AFFC0A /* Presenter */,
 				225B46112DD7049200AFFC0A /* AppDelegate.swift */,
 				225B46132DD7049200AFFC0A /* SceneDelegate.swift */,
 				225B46152DD7049200AFFC0A /* ViewController.swift */,
@@ -68,6 +71,27 @@
 				225B461A2DD7049200AFFC0A /* ScoreSphere.xcdatamodeld */,
 			);
 			path = ScoreSphere;
+			sourceTree = "<group>";
+		};
+		225B46282DD709DE00AFFC0A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		225B46292DD709EE00AFFC0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		225B462A2DD709FB00AFFC0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

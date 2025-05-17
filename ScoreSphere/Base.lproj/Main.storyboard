@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="2373" y="14"/>
         </scene>
-        <!--View Controller-->
+        <!--Sports View Controller-->
         <scene sceneID="QPE-ci-EOv">
             <objects>
-                <viewController id="EOk-W6-a3Y" sceneMemberID="viewController">
+                <viewController id="EOk-W6-a3Y" customClass="SportsViewController" customModule="ScoreSphere" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ycQ-0s-eps">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="NZc-b4-Mx7">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SportCell" id="NZc-b4-Mx7" customClass="SportCell" customModule="ScoreSphere" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="167" height="170"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TPE-rc-2C3">
@@ -62,6 +62,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="167" height="170"/>
+                                        <connections>
+                                            <outlet property="sportImageView" destination="sBy-Gk-2K7" id="0KE-OZ-q2s"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6Wr-dh-PJe">
                                         <rect key="frame" x="194" y="0.0" width="167" height="170"/>
@@ -136,10 +139,65 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pNM-yi-HXo"/>
+                    <connections>
+                        <outlet property="collectionView" destination="hpn-ME-KYC" id="rNw-5b-b4n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GNZ-po-v7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1863.3587786259541" y="-702.11267605633805"/>
+        </scene>
+        <!--Teams View Controller-->
+        <scene sceneID="pXC-uQ-TTb">
+            <objects>
+                <tableViewController storyboardIdentifier="TeamsViewController" id="fpx-kG-lkv" customClass="TeamsViewController" customModule="ScoreSphere" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="3cc-3e-MlU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamCell" rowHeight="100" id="N1F-qd-gcB" customClass="TableViewCell" customModule="ScoreSphere" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N1F-qd-gcB" id="kYI-KY-bIF">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Sm-2t-aTG">
+                                            <rect key="frame" x="5" y="5" width="208" height="90"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCe-cF-fVT">
+                                            <rect key="frame" x="221" y="22" width="152" height="38"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="5Sm-2t-aTG" secondAttribute="trailing" constant="180" id="BWE-s0-ywm"/>
+                                        <constraint firstAttribute="bottom" secondItem="5Sm-2t-aTG" secondAttribute="bottom" constant="5" id="HrR-sN-80f"/>
+                                        <constraint firstItem="zCe-cF-fVT" firstAttribute="top" secondItem="kYI-KY-bIF" secondAttribute="topMargin" constant="20" id="Kby-DC-3C0"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zCe-cF-fVT" secondAttribute="bottom" constant="20" id="QFM-7A-2cG"/>
+                                        <constraint firstItem="5Sm-2t-aTG" firstAttribute="leading" secondItem="kYI-KY-bIF" secondAttribute="leading" constant="5" id="lnV-cG-X6i"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zCe-cF-fVT" secondAttribute="trailing" constant="50" id="tZA-g1-7jn"/>
+                                        <constraint firstItem="5Sm-2t-aTG" firstAttribute="top" secondItem="kYI-KY-bIF" secondAttribute="top" constant="5" id="vsJ-az-C81"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="teamImageView" destination="5Sm-2t-aTG" id="yGu-Up-jg8"/>
+                                    <outlet property="teamNameLabel" destination="zCe-cF-fVT" id="qun-33-VBe"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fpx-kG-lkv" id="MFP-fP-Tr0"/>
+                            <outlet property="delegate" destination="fpx-kG-lkv" id="PDl-3z-3aa"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fC4-dr-B1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3052.6717557251909" y="-625.35211267605632"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZrA-G3-zz7">

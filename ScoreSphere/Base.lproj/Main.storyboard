@@ -133,7 +133,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZnD-Ru-bwl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3887.7862595419847" y="118.30985915492958"/>
+            <point key="canvasLocation" x="4140" y="-625"/>
         </scene>
         <!--Sports View Controller-->
         <scene sceneID="QPE-ci-EOv">

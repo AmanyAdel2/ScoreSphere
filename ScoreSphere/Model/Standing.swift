@@ -7,11 +7,12 @@
 
 import Foundation
 
-struct StandingsResponse: Codable {
-    let result: [String: [Standing]]?
-}
-
-struct Standing: Codable {
-    let team_name: String
-    let overall_league_PTS: String
-}
+//struct StandingsResponse: Codable {
+//    let result: [String: [Standing]]?
+//}
+//
+//struct Standing: Codable {
+//    let team_name: String
+//    let overall_league_PTS: String
+//    let team_logo: String?
+//}

@@ -12,8 +12,6 @@ class SportsViewController: UIViewController,UICollectionViewDelegate, UICollect
     @IBOutlet weak var collectionView: UICollectionView!
 
     
-
-       
         let sports: [Sport] = [
                 Sport(name: "Football", imageName: "football"),
                 Sport(name: "Basketball", imageName: "basketball"),

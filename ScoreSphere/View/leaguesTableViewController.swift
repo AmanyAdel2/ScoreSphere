@@ -69,5 +69,17 @@ class leaguesTableViewController: UITableViewController, LeaguesViewProtocol {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedLeague = leagues[indexPath.row]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let detailsVC = storyboard.instantiateViewController(withIdentifier: "LeagueDetailsCollectionViewController") as? LeagueDetailsCollectionViewController {
+            detailsVC.sportName = sportName
+            detailsVC.leagueId = "\(selectedLeague.league_key)"
+            
+            navigationController?.pushViewController(detailsVC, animated: true)
+        }
+    }
+
 
 }

@@ -33,28 +33,24 @@ class NetworkManager {
             }
         }
     }
-
-    func fetchStandings(leagueId: String, completion: @escaping ([Standing]) -> Void) {
+    
+    func fetchTeams(leagueId: String, completion: @escaping ([TeamsStanding]) -> Void) {
         let params: [String: Any] = [
-            "met": "Standings",
+            "met": "Teams",
             "APIkey": apiKey,
             "leagueId": leagueId
         ]
 
-        AF.request(baseURL, parameters: params).responseDecodable(of: StandingsResponse.self) { response in
+        AF.request(baseURL, parameters: params).responseDecodable(of: TeamResponse.self) { response in
             switch response.result {
             case .success(let data):
-                // Flatten the dictionary values arrays into a single array
-                if let result = data.result {
-                    let allStandings = result.values.flatMap { $0 }
-                    completion(allStandings)
-                } else {
-                    completion([])
-                }
+                completion(data.result ?? [])
             case .failure(let error):
-                print("Error fetching standings:", error)
+                print("Error fetching teams:", error)
                 completion([])
             }
         }
     }
+
+
 }

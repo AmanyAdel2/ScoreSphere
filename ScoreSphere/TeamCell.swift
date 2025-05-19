@@ -10,22 +10,32 @@ import UIKit
 class TeamCell: UICollectionViewCell {
     let imageView = UIImageView()
 
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            imageView.frame = bounds
-            imageView.contentMode = .scaleAspectFill
-            imageView.layer.cornerRadius = frame.width / 2
-            imageView.clipsToBounds = true
-            contentView.addSubview(imageView)
-            backgroundColor = .systemGreen
+    @IBOutlet weak var teamName: UILabel!
+    @IBOutlet weak var teamImg: UIImageView!
+    
+    
+    
+    override func awakeFromNib() {
+            super.awakeFromNib()
         }
+        
+    
+    func configure(with team: TeamsStanding) {
+        teamName.text = team.teamName
+        if let logoURL = team.teamLogo, let url = URL(string: logoURL) {
+            URLSession.shared.dataTask(with: url) { data, _, _ in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self.teamImg.image = UIImage(data: data)
+                    }
+                }
+            }.resume()
+        } else {
+            teamImg.image = UIImage(systemName: "person.circle")
+        }
+    }
 
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    }
+  
+    
 
-        func configure(with team: Team) {
-            imageView.image = UIImage(systemName: "person.circle") // Placeholder
-            // Replace with actual image loading from `team.logo`
-        }
-}

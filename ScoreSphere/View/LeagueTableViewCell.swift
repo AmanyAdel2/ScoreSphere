@@ -30,4 +30,11 @@ class LeagueTableViewCell: UITableViewCell {
             leagueLogoImageView.image = UIImage(systemName: "photo")
         }
     }
+    
+    var onFavoriteTapped: (() -> Void)?
+    
+    @IBAction func addToFavorite(_ sender: Any) {
+        onFavoriteTapped?()
+        (sender as AnyObject).setImage(UIImage(systemName: "heart.fill"), for: .normal)
+    }
 }

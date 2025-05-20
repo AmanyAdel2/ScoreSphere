@@ -66,6 +66,12 @@ class leaguesTableViewController: UITableViewController, LeaguesViewProtocol {
 
         let league = leagues[indexPath.row]
         cell.configure(with: league)
+        cell.onFavoriteTapped = {
+            let league = self.leagues[indexPath.row]
+            let repo = RepositoryImp()
+            let useCase = FavoriteLeaguesUseCase(repo: repo)
+            useCase.saveToFavorite(league)
+        }
         return cell
     }
 

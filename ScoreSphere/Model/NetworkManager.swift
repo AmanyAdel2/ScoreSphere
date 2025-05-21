@@ -10,11 +10,16 @@ import Alamofire
 
 class NetworkManager {
     static let shared = NetworkManager()
-
-    private let baseURL = "https://apiv2.allsportsapi.com/football/"
+    
     private let apiKey = "d2010d67eec8cc2b8a8d2eae218bff8d51a1be45296edd8a468f4f23cc7c0dfd"
-
-    func fetchFixtures(from: String, to: String, leagueId: String, completion: @escaping ([Fixture]) -> Void) {
+    
+    func fetchFixtures(
+        sport: SportType,
+        from: String,
+        to: String,
+        leagueId: String,
+        completion: @escaping ([Fixture]) -> Void
+    ) {
         let params: [String: Any] = [
             "met": "Fixtures",
             "APIkey": apiKey,
@@ -22,35 +27,39 @@ class NetworkManager {
             "to": to,
             "leagueId": leagueId
         ]
-
-        AF.request(baseURL, parameters: params).responseDecodable(of: FixturesResponse.self) { response in
-            switch response.result {
-            case .success(let data):
-                completion(data.result ?? [])
-            case .failure(let error):
-                print("Error fetching fixtures:", error)
-                completion([])
+        
+        AF.request(sport.baseURL, parameters: params)
+            .responseDecodable(of: FixturesResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(data.result ?? [])
+                case .failure(let error):
+                    print("Error fetching fixtures:", error)
+                    completion([])
+                }
             }
-        }
     }
     
-    func fetchTeams(leagueId: String, completion: @escaping ([TeamsStanding]) -> Void) {
+    func fetchTeams(
+        sport: SportType,
+        leagueId: String,
+        completion: @escaping ([TeamsStanding]) -> Void
+    ) {
         let params: [String: Any] = [
             "met": "Teams",
             "APIkey": apiKey,
             "leagueId": leagueId
         ]
-
-        AF.request(baseURL, parameters: params).responseDecodable(of: TeamResponse.self) { response in
-            switch response.result {
-            case .success(let data):
-                completion(data.result ?? [])
-            case .failure(let error):
-                print("Error fetching teams:", error)
-                completion([])
+        
+        AF.request(sport.baseURL, parameters: params)
+            .responseDecodable(of: TeamResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(data.result ?? [])
+                case .failure(let error):
+                    print("Error fetching teams:", error)
+                    completion([])
+                }
             }
-        }
     }
-
-
 }

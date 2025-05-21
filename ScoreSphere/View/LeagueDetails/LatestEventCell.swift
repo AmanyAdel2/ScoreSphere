@@ -9,7 +9,7 @@ import UIKit
 
 class LatestEventCell: UICollectionViewCell {
     let label = UILabel()
-
+    
     @IBOutlet weak var teamOneImg: UIImageView!
     
     @IBOutlet weak var teamOneName: UILabel!
@@ -24,20 +24,13 @@ class LatestEventCell: UICollectionViewCell {
     
     
     override func awakeFromNib() {
-            super.awakeFromNib()
-            setupViews()
-        }
+        super.awakeFromNib()
+        teamOneImg.contentMode = .scaleAspectFit
+        teamTwoImg.contentMode = .scaleAspectFit
         
-        private func setupViews() {
-            teamOneImg.contentMode = .scaleAspectFit
-            teamTwoImg.contentMode = .scaleAspectFit
-            
-            contentView.layer.cornerRadius = 10
-            contentView.layer.borderWidth = 0.5
-            contentView.layer.borderColor = UIColor.lightGray.cgColor
-        }
-    
-    
+        contentView.layer.cornerRadius = 10
+        contentView.layer.borderWidth = 2
+    }
     
     func configure(with event: Event) {
         teamOneName.text = event.homeTeam

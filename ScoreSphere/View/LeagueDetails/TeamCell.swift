@@ -16,8 +16,10 @@ class TeamCell: UICollectionViewCell {
     
     
     override func awakeFromNib() {
-            super.awakeFromNib()
-        }
+        super.awakeFromNib()
+        contentView.layer.cornerRadius = 10
+        contentView.layer.borderWidth = 2
+    }
         
     
     func configure(with team: TeamsStanding) {
@@ -31,7 +33,7 @@ class TeamCell: UICollectionViewCell {
                 }
             }.resume()
         } else {
-            teamImg.image = UIImage(systemName: "person.circle")
+            teamImg.image = UIImage(systemName: "")
         }
     }
 

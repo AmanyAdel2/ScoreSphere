@@ -13,6 +13,7 @@ class SportsViewController: UIViewController,UICollectionViewDelegate, UICollect
 
     
         let sports: [Sport] = [
+            
                 Sport(name: "Football", imageName: "football"),
                 Sport(name: "Basketball", imageName: "basketball"),
                 Sport(name: "Cricket", imageName: "cricket"),

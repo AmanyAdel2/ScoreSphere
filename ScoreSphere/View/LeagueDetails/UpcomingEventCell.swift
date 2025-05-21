@@ -8,6 +8,7 @@
 import UIKit
 
 class UpcomingEventCell: UICollectionViewCell {
+    
     @IBOutlet weak var fTeamImg: UIImageView!
     @IBOutlet weak var sTeamImg: UIImageView!
     @IBOutlet weak var fTeamName: UILabel!
@@ -17,7 +18,16 @@ class UpcomingEventCell: UICollectionViewCell {
     
     @IBOutlet weak var time: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
     
+        
+        contentView.layer.cornerRadius = 10
+        contentView.layer.borderWidth = 2
+        fTeamImg.contentMode = .scaleAspectFit
+        sTeamImg.contentMode = .scaleAspectFit
+    }
+
     func configure(with event: Event) {
             fTeamName.text = event.homeTeam
             sTeamName.text = event.awayTeam

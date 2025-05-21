@@ -15,3 +15,17 @@ protocol LeaguesPresenterProtocol {
     func getLeagues(for sportName: String)
 }
 
+
+
+protocol LeagueDetailsViewProtocol: AnyObject {
+    func reloadData()
+}
+
+protocol LeagueDetailsPresenterProtocol: AnyObject {
+    func fetchData()
+    
+    func getUpcomingFixtures() -> [Fixture]
+    func getLatestFixtures() -> [Fixture]
+    func getTeamStandings() -> [TeamsStanding]
+}
+

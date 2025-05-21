@@ -11,13 +11,15 @@ import CoreData
 class RepositoryImp : Repository{
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func saveLeague( _ league : League ) {
+    func saveLeague( _ league : League , sportType: SportType) {
         let favorite = FavoriteLeagues(context: context)
         favorite.league_name = league.league_name
         favorite.league_logo = league.league_logo
         favorite.country_name = league.country_name
         favorite.country_logo = league.country_logo
         favorite.league_key = Int64(league.league_key)
+        favorite.sport_type = sportType.rawValue
+        
         do{
             try context.save()
         }catch{

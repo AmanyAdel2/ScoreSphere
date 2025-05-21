@@ -25,47 +25,39 @@ class LatestEventCell: UICollectionViewCell {
     
     override func awakeFromNib() {
             super.awakeFromNib()
-            setupViews()
-        }
-        
-        private func setupViews() {
             teamOneImg.contentMode = .scaleAspectFit
             teamTwoImg.contentMode = .scaleAspectFit
             
             contentView.layer.cornerRadius = 10
-            contentView.layer.borderWidth = 0.5
-            contentView.layer.borderColor = UIColor.lightGray.cgColor
+            contentView.layer.borderWidth = 2
         }
-    
-    
-    
-    func configure(with event: Event) {
-        teamOneName.text = event.homeTeam
-        teamTwoName.text = event.awayTeam
-        finalResult.text = event.homeScore ?? "N/A"
+        
+        func configure(with event: Event) {
+            teamOneName.text = event.homeTeam
+            teamTwoName.text = event.awayTeam
+            finalResult.text = event.homeScore ?? "N/A"
 
-        if let logoURL = event.homeTeamLogo, let url = URL(string: logoURL) {
-            loadImage(from: url, into: teamOneImg)
-        } else {
-            teamOneImg.image = UIImage(systemName: "house.fill")
-        }
-
-        if let logoURL = event.awayTeamLogo, let url = URL(string: logoURL) {
-            loadImage(from: url, into: teamTwoImg)
-        } else {
-            teamTwoImg.image = UIImage(systemName: "building.2.fill")
-        }
-    }
-
-
-
-    func loadImage(from url: URL, into imageView: UIImageView) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                imageView.image = image
+            if let logoURL = event.homeTeamLogo, let url = URL(string: logoURL) {
+                loadImage(from: url, into: teamOneImg)
+            } else {
+                teamOneImg.image = UIImage(systemName: "house.fill")
             }
-        }.resume()
-    }
 
+            if let logoURL = event.awayTeamLogo, let url = URL(string: logoURL) {
+                loadImage(from: url, into: teamTwoImg)
+            } else {
+                teamTwoImg.image = UIImage(systemName: "building.2.fill")
+            }
+        }
+
+
+
+        func loadImage(from url: URL, into imageView: UIImageView) {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, let image = UIImage(data: data) else { return }
+                DispatchQueue.main.async {
+                    imageView.image = image
+                }
+            }.resume()
+        }
 }

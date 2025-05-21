@@ -7,7 +7,7 @@
 
 import Foundation
 protocol Repository{
-    func saveLeague(_ league:League)
+    func saveLeague(_ league:League,sportType: SportType)
     func fetchFavoriteLeagues()->[FavoriteLeagues]
     func deleteFavorite(_ favorite: FavoriteLeagues)
 }

@@ -100,6 +100,9 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
 
     func showFavoriteLeague(_ favorites: [FavoriteLeagues]) {
+        for fav in favorites {
+                print("league_name: \(fav.league_name ?? "nil"), sport_type: \(fav.sport_type ?? "nil")")
+            }
         DispatchQueue.main.async {
                self.favorites = favorites
                self.favTableView.reloadData()
@@ -107,17 +110,26 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFavorite = favorites[indexPath.row]
-        
+
+        guard let sportTypeString = selectedFavorite.sport_type,
+              let sportType = SportType(rawValue: sportTypeString) else {
+            print("Missing or invalid sport_type in CoreData for league: \(selectedFavorite.league_name ?? "Unknown")")
+            return
+        }
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailsVC = storyboard.instantiateViewController(withIdentifier: "LeagueDetailsCollectionViewController") as? LeagueDetailsCollectionViewController {
-            
-            detailsVC.leagueId = String(selectedFavorite.league_key)
 
-            //detailsVC.sportName = selectedFavorite.sport_name
-            
+            detailsVC.leagueId = String(selectedFavorite.league_key)
+            detailsVC.sportType = sportType
             navigationController?.pushViewController(detailsVC, animated: true)
+        } else {
+            print("Failed to instantiate LeagueDetailsCollectionViewController")
         }
     }
+
+    }
+
 
     
     
@@ -133,4 +145,4 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
     */
 
-}
+

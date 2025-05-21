@@ -11,9 +11,9 @@ class FavoriteLeaguesUseCase {
     init(repo: Repository) {
         self.repo = repo
     }
-    func saveToFavorite(_ league : League){
-        repo.saveLeague(league)
-    }
+    func saveToFavorite(_ league: League, sportType: SportType) {
+            repo.saveLeague(league, sportType: sportType)
+        }
     func getFavorites()->[FavoriteLeagues]{
         repo.fetchFavoriteLeagues()
     }

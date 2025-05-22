@@ -40,4 +40,8 @@ protocol TeamDetailsPresenterProtocol: AnyObject {
     
     func fetchTeamDetails()
 }
+protocol NetworkManagerProtocol {
+    func requestLeagues(for sport: String, completion: @escaping (Result<[[String: Any]], Error>) -> Void)
+}
+
 

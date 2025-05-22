@@ -10,6 +10,13 @@ import Alamofire
 
 class NetworkManager {
     static let shared = NetworkManager()
+    private let session: Session
+
+        
+        init(session: Session = .default) {
+            self.session = session
+        }
+
     
     private let apiKey = "d2010d67eec8cc2b8a8d2eae218bff8d51a1be45296edd8a468f4f23cc7c0dfd"
     
@@ -28,16 +35,26 @@ class NetworkManager {
             "leagueId": leagueId
         ]
         
-        AF.request(sport.baseURL, parameters: params)
-            .responseDecodable(of: FixturesResponse.self) { response in
-                switch response.result {
-                case .success(let data):
-                    completion(data.result ?? [])
-                case .failure(let error):
-                    print("Error fetching fixtures:", error)
-                    completion([])
-                }
-            }
+//        AF.request(sport.baseURL, parameters: params)
+//            .responseDecodable(of: FixturesResponse.self) { response in
+//                switch response.result {
+//                case .success(let data):
+//                    completion(data.result ?? [])
+//                case .failure(let error):
+//                    print("Error fetching fixtures:", error)
+//                    completion([])
+//                }
+//            }
+        session.request(sport.baseURL, parameters: params)
+                    .responseDecodable(of: FixturesResponse.self) { response in
+                        switch response.result {
+                        case .success(let data):
+                            completion(data.result ?? [])
+                        case .failure:
+                            completion([])
+                        }
+                    }
+        
     }
     
     func fetchTeams(
@@ -51,7 +68,7 @@ class NetworkManager {
             "leagueId": leagueId
         ]
         
-        AF.request(sport.baseURL, parameters: params)
+        session.request(sport.baseURL, parameters: params)
             .responseDecodable(of: TeamResponse.self) { response in
                 switch response.result {
                 case .success(let data):
@@ -74,7 +91,7 @@ class NetworkManager {
             "teamId": teamId
         ]
         
-        AF.request(sport.baseURL, parameters: params)
+        session.request(sport.baseURL, parameters: params)
             .responseDecodable(of: TeamDetailsResponse.self) { response in
                 switch response.result {
                 case .success(let data):
@@ -84,6 +101,7 @@ class NetworkManager {
                     completion(nil)
                 }
             }
+        
     }
 
 }

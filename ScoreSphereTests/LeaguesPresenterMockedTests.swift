@@ -1,25 +1,26 @@
 //
-//  LeaguesPresenterMockedTests.swift
+//  LeaguesPresenterTests.swift
 //  ScoreSphereTests
-//
-//  Created by Macos on 22/05/2025.
 //
 
 import XCTest
 @testable import ScoreSphere
+
+// MARK: - Mocks
+
 class MockNetworkManager: NetworkManagerProtocol {
-    var shouldReturnError = false
-    var mockResult: [[String: Any]] = []
+    var shouldFail = false
+    var mockData: [[String: Any]] = []
+    var error: Error = NSError(domain: "MockError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Mock failure"])
 
     func requestLeagues(for sport: String, completion: @escaping (Result<[[String: Any]], Error>) -> Void) {
-        if shouldReturnError {
-            completion(.failure(NSError(domain: "MockError", code: -1)))
+        if shouldFail {
+            completion(.failure(error))
         } else {
-            completion(.success(mockResult))
+            completion(.success(mockData))
         }
     }
 }
-
 
 class MockLeaguesView: LeaguesViewProtocol {
     var leaguesShown: [League]?
@@ -34,36 +35,12 @@ class MockLeaguesView: LeaguesViewProtocol {
     }
 }
 
-class LeaguesPresenterTests: XCTestCase {
+// MARK: - Tests
 
+final class LeaguesPresenterTests: XCTestCase {
     var presenter: LeaguesPresenter!
-    var mockView: MockLeaguesView!
-
-    override func setUp() {
-        super.setUp()
-        mockView = MockLeaguesView()
-        presenter = LeaguesPresenter(view: mockView)
-    }
-
-    func testUnsupportedSportShowsError() {
-        // Given
-        let unsupportedSport = "volleyball"
-
-        // When
-        presenter.getLeagues(for: unsupportedSport)
-
-        // Then
-        XCTAssertEqual(mockView.errorMessageShown, "Unsupported sport: \(unsupportedSport)")
-    }
-
-    
-}
-
-
-class LeaguesPresenterMockedTests: XCTestCase {
     var mockView: MockLeaguesView!
     var mockNetwork: MockNetworkManager!
-    var presenter: LeaguesPresenter!
 
     override func setUp() {
         super.setUp()
@@ -72,34 +49,84 @@ class LeaguesPresenterMockedTests: XCTestCase {
         presenter = LeaguesPresenter(view: mockView, networkManager: mockNetwork)
     }
 
-    func testGetLeaguesSuccess() {
-        mockNetwork.shouldReturnError = false
-        mockNetwork.mockResult = [
+    func testUnsupportedSportShowsError() {
+        presenter.getLeagues(for: "volleyball")
+        XCTAssertEqual(mockView.errorMessageShown, "Unsupported sport: volleyball")
+    }
+
+    func testSuccessfulLeaguesParsing() {
+        mockNetwork.shouldFail = false
+        mockNetwork.mockData = [
             [
-                "league_key": 123,
-                "league_name": "Premier League",
-                "country_key": 1,
-                "country_name": "England"
+                "league_key": 100,
+                "league_name": "Champions League",
+                "country_key": 50,
+                "country_name": "Europe",
+                "league_logo": "https://example.com/logo.png",
+                "country_logo": "https://example.com/country.png"
             ]
         ]
 
+        let expectation = self.expectation(description: "Wait for async league show")
+
         presenter.getLeagues(for: "football")
 
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             XCTAssertEqual(self.mockView.leaguesShown?.count, 1)
-            XCTAssertEqual(self.mockView.leaguesShown?.first?.league_name, "Premier League")
+            XCTAssertEqual(self.mockView.leaguesShown?.first?.league_name, "Champions League")
+            XCTAssertEqual(self.mockView.leaguesShown?.first?.country_name, "Europe")
+            expectation.fulfill()
         }
+
+        waitForExpectations(timeout: 1)
     }
 
-    func testGetLeaguesFailure() {
-        mockNetwork.shouldReturnError = true
+    func testEmptyLeagueArrayReturnsEmptyList() {
+        mockNetwork.shouldFail = false
+        mockNetwork.mockData = []
 
-        presenter.getLeagues(for: "football")
+        let expectation = self.expectation(description: "Empty list shown")
+
+        presenter.getLeagues(for: "cricket")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            XCTAssertNotNil(self.mockView.errorMessageShown)
-            XCTAssertTrue(self.mockView.errorMessageShown?.contains("Request failed") ?? false)
+            XCTAssertEqual(self.mockView.leaguesShown?.count, 0)
+            expectation.fulfill()
         }
+
+        waitForExpectations(timeout: 1)
+    }
+
+    func testMissingFieldsUseDefaultValues() {
+        mockNetwork.shouldFail = false
+        mockNetwork.mockData = [
+            [:]  // Missing all fields
+        ]
+
+        let expectation = self.expectation(description: "Use defaults for missing fields")
+
+        presenter.getLeagues(for: "tennis")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let league = self.mockView.leaguesShown?.first
+            XCTAssertEqual(league?.league_key, 0)
+            XCTAssertEqual(league?.league_name, "Unknown League")
+            XCTAssertEqual(league?.country_key, 0)
+            XCTAssertEqual(league?.country_name, "Unknown Country")
+            XCTAssertNil(league?.league_logo)
+            XCTAssertNil(league?.country_logo)
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+
+    func testNetworkFailureShowsErrorMessage() {
+        mockNetwork.shouldFail = true
+        mockNetwork.error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Connection timeout"])
+
+        presenter.getLeagues(for: "basketball")
+
+        XCTAssertEqual(mockView.errorMessageShown, "Request failed: Connection timeout")
     }
 }

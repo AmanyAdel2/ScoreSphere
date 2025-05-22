@@ -10,4 +10,5 @@ import UIKit
 class SportCell: UICollectionViewCell {
     @IBOutlet weak var sportImageView: UIImageView!
     
+    @IBOutlet weak var sportName: UILabel!
 }

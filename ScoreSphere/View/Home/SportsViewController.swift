@@ -13,10 +13,10 @@ class SportsViewController: UIViewController,UICollectionViewDelegate, UICollect
 
     
         let sports: [Sport] = [
-                Sport(name: "Football", imageName: "football"),
-                Sport(name: "Basketball", imageName: "basketball"),
-                Sport(name: "Cricket", imageName: "cricket"),
-                Sport(name: "Tennis", imageName: "tennis")
+                Sport(name: "Football", imageName: "football",sportName: "FOOTBALL"),
+                Sport(name: "Basketball", imageName: "basketball",sportName: "BASKETBALL"),
+                Sport(name: "Cricket", imageName: "cricket",sportName: "CRICKET"),
+                Sport(name: "Tennis", imageName: "tennis",sportName: "TENNIS")
             ]
 
             override func viewDidLoad() {
@@ -28,11 +28,32 @@ class SportsViewController: UIViewController,UICollectionViewDelegate, UICollect
             func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
                 return sports.count
             }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = 16
+        let itemsPerRow: CGFloat = 2
+
+        let availableWidth = collectionView.bounds.width - padding
+        let widthPerItem = availableWidth / itemsPerRow
+
+        return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
+    }
+
+    
+    
 
             func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SportCell", for: indexPath) as! SportCell
                 let sport = sports[indexPath.item]
                 cell.sportImageView.image = UIImage(named: sport.imageName)
+                cell.sportName.text = sport.sportName
                 return cell
             }
 

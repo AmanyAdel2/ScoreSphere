@@ -1,5 +1,5 @@
 //
-//  leagueDetailsCollectionViewController.swift
+//  LeagueDetailsCollectionViewController.swift
 //  ScoreSphere
 //
 //  Created by Macos on 17/05/2025.
@@ -8,9 +8,9 @@
 import UIKit
 
 class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueDetailsViewProtocol {
-    
+
     var presenter: LeagueDetailsPresenterProtocol!
-    
+
     var sportType: SportType! {
         didSet {
             if let presenter = presenter as? LeagueDetailsPresenter {
@@ -18,6 +18,7 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
             }
         }
     }
+
     var leagueId: String! {
         didSet {
             if let presenter = presenter as? LeagueDetailsPresenter {
@@ -25,26 +26,28 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
             }
         }
     }
-    
+
+    var teams: [TeamsStanding] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         collectionView.setCollectionViewLayout(createLayout(), animated: true)
-        
+
         presenter = LeagueDetailsPresenter()
         if let presenter = presenter as? LeagueDetailsPresenter {
             presenter.view = self
             presenter.sportType = sportType
             presenter.leagueId = leagueId
         }
-        
+
         presenter.fetchData()
     }
-    
+
     func reloadData() {
         collectionView.reloadData()
     }
-    
+
     func createLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, _ in
             switch sectionIndex {
@@ -91,11 +94,11 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
             }
         }
     }
-    
+
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0: return presenter.getUpcomingFixtures().count
@@ -104,7 +107,7 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
         default: return 0
         }
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
@@ -123,7 +126,7 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
             )
             cell.configure(with: event)
             return cell
-            
+
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestEventCell", for: indexPath) as! LatestEventCell
             let fixture = presenter.getLatestFixtures()[indexPath.item]
@@ -140,15 +143,46 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
             )
             cell.configure(with: event)
             return cell
-            
+
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! TeamCell
             let team = presenter.getTeamStandings()[indexPath.item]
             cell.configure(with: team)
             return cell
-            
+
         default:
             fatalError("Unexpected section \(indexPath.section)")
         }
     }
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Only allow selection in the Teams section
+        guard indexPath.section == 2 else { return }
+        
+        let teams = presenter.getTeamStandings()
+        guard indexPath.item < teams.count else { return }
+        
+        let selectedTeam = teams[indexPath.item]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "TeamDetailsViewController") as? TeamDetailsViewController {
+            
+            let teamDetailsPresenter: TeamDetailsPresenterProtocol = TeamDetailsPresenter()
+            
+            // Pass data to the presenter
+            teamDetailsPresenter.teamId = selectedTeam.teamKey
+            teamDetailsPresenter.sport = self.sportType
+            
+            // Set the presenter to the view controller
+            vc.presenter = teamDetailsPresenter
+            
+            // The view will set itself as presenter's view in viewDidLoad of TeamDetailsViewController
+            
+            // Push the details view controller
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
+
 }
+

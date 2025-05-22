@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 enum SportType: String {
     case football
     case basketball

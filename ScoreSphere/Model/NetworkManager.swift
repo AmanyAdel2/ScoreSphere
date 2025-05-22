@@ -60,6 +60,30 @@ class NetworkManager {
                     print("Error fetching teams:", error)
                     completion([])
                 }
+        }
+    }
+    
+    func fetchTeamDetails(
+        sport: SportType,
+        teamId: Int,
+        completion: @escaping (TeamDetails?) -> Void
+    ) {
+        let params: [String: Any] = [
+            "met": "Teams",
+            "APIkey": apiKey,
+            "teamId": teamId
+        ]
+        
+        AF.request(sport.baseURL, parameters: params)
+            .responseDecodable(of: TeamDetailsResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(data.result?.first) 
+                case .failure(let error):
+                    print("Error fetching team details:", error)
+                    completion(nil)
+                }
             }
     }
+
 }

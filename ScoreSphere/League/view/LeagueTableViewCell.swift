@@ -15,9 +15,12 @@ class LeagueTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        leagueLogoImageView.contentMode = .scaleAspectFit
-//        leagueLogoImageView.clipsToBounds = true
-//        leagueLogoImageView.layer.cornerRadius = 8
+        self.contentView.layer.borderWidth = 2.0
+        self.contentView.layer.borderColor = UIColor.black.cgColor
+        self.contentView.layer.cornerRadius = 8.0
+        self.contentView.layer.masksToBounds = true
+        
+        
         
     }
 
@@ -25,9 +28,10 @@ class LeagueTableViewCell: UITableViewCell {
         leagueNameLabel.text = league.league_name
 
         if let logoURLString = league.league_logo, let url = URL(string: logoURLString) {
-            leagueLogoImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            leagueLogoImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "trophy"))
+            
         } else {
-            leagueLogoImageView.image = UIImage(systemName: "photo")
+            leagueLogoImageView.image = UIImage(systemName: "trophy")
         }
     }
     
@@ -35,6 +39,6 @@ class LeagueTableViewCell: UITableViewCell {
     
     @IBAction func addToFavorite(_ sender: Any) {
         onFavoriteTapped?()
-        (sender as AnyObject).setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        
     }
 }

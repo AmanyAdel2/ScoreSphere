@@ -72,6 +72,8 @@ class leaguesTableViewController: UITableViewController, LeaguesViewProtocol {
             let useCase = FavoriteLeaguesUseCase(repo: repo)
             if let sportName = self.sportName,
                let sportType = SportType(rawValue: sportName.lowercased()) {
+                UIApplication.shared.showToastOnWindow(message: "Added to favorites!")
+
                 useCase.saveToFavorite(league, sportType: sportType)
             } else {
                 print("Invalid or missing sportName for saving favorite")
@@ -98,5 +100,45 @@ class leaguesTableViewController: UITableViewController, LeaguesViewProtocol {
         }
         
         
+    }
+}
+extension UIApplication {
+    func showToastOnWindow(message: String, duration: Double = 2.0) {
+        guard let window = windows.first(where: { $0.isKeyWindow }) else { return }
+        
+        let toastLabel = UILabel()
+        toastLabel.text = message
+        toastLabel.textColor = .white
+        toastLabel.backgroundColor = .systemGreen
+        toastLabel.textAlignment = .center
+        toastLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        toastLabel.alpha = 0.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+        toastLabel.numberOfLines = 0
+
+        let maxWidth = window.frame.size.width - 40
+        let maxSize = CGSize(width: maxWidth, height: .greatestFiniteMagnitude)
+        var expectedSize = toastLabel.sizeThatFits(maxSize)
+        expectedSize.width = min(expectedSize.width + 40, maxWidth)
+
+        toastLabel.frame = CGRect(
+            x: (window.frame.size.width - expectedSize.width) / 2,
+            y: window.frame.size.height - expectedSize.height - 80 - window.safeAreaInsets.bottom,
+            width: expectedSize.width,
+            height: expectedSize.height + 20
+        )
+
+        window.addSubview(toastLabel)
+
+        UIView.animate(withDuration: 0.5, animations: {
+            toastLabel.alpha = 1.0
+        }) { _ in
+            UIView.animate(withDuration: 0.5, delay: duration, options: .curveEaseOut, animations: {
+                toastLabel.alpha = 0.0
+            }) { _ in
+                toastLabel.removeFromSuperview()
+            }
+        }
     }
 }

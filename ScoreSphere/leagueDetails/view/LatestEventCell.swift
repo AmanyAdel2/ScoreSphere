@@ -46,13 +46,13 @@ class LatestEventCell: UICollectionViewCell {
             if let logoURL = event.homeTeamLogo, let url = URL(string: logoURL) {
                 loadImage(from: url, into: teamOneImg)
             } else {
-                teamOneImg.image = UIImage(systemName: "")
+                teamOneImg.image = UIImage(systemName: "photo")
             }
 
             if let logoURL = event.awayTeamLogo, let url = URL(string: logoURL) {
                 loadImage(from: url, into: teamTwoImg)
             } else {
-                teamTwoImg.image = UIImage(systemName: "")
+                teamTwoImg.image = UIImage(systemName: "photo")
             }
         }
 

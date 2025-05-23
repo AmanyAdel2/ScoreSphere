@@ -19,6 +19,10 @@ class PlayerTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        self.contentView.layer.borderWidth = 2.0
+        self.contentView.layer.borderColor = UIColor.black.cgColor
+        self.contentView.layer.cornerRadius = 8.0
+        self.contentView.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

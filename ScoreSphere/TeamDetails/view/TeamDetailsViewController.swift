@@ -76,14 +76,14 @@ class TeamDetailsViewController: UIViewController, UITableViewDataSource, TeamDe
         if indexPath.row == 0 && coachName != nil {
             cell.playerName.text = "Coach: \(coachName!)"
             cell.playerType.text = nil
-            cell.playerImg.image = UIImage(named: "coachPlaceholder")
+            cell.playerImg.image = UIImage(systemName: "person")
         } else {
             let playerIndex = coachName != nil ? indexPath.row - 1 : indexPath.row
             let player = players[playerIndex]
             
             cell.playerName.text = player.player_name
             cell.playerType.text = "\(player.player_type ?? "") - #\(player.player_number ?? "-")"
-            cell.playerImg.image = UIImage(named: "placeholder")
+            cell.playerImg.image = UIImage(systemName: "person")
             if let imageUrlString = player.player_image, let imageUrl = URL(string: imageUrlString) {
                 DispatchQueue.global().async {
                     if let data = try? Data(contentsOf: imageUrl), let image = UIImage(data: data) {

@@ -44,6 +44,7 @@
 		22A93A8C2DDEFBD500D11F09 /* ScoreSphereTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A93A8B2DDEFBD500D11F09 /* ScoreSphereTests.swift */; };
 		22A93A972DDEFF8000D11F09 /* RealNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A93A962DDEFF8000D11F09 /* RealNetworkManager.swift */; };
 		22A93A9D2DDF3E6A00D11F09 /* LeaguesPresenterMockedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A93A9C2DDF3E6A00D11F09 /* LeaguesPresenterMockedTests.swift */; };
+		22AE67942DE0BABC00B29CD1 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AE67932DE0BABC00B29CD1 /* SectionHeaderView.swift */; };
 		22BDDA1E2DDA93F300D4BB28 /* TeamStanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDDA1D2DDA93F300D4BB28 /* TeamStanding.swift */; };
 		22DC65052DD783D500E5DCFC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 22DC65042DD783D500E5DCFC /* Alamofire */; };
 		22DC65072DD783D500E5DCFC /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 22DC65062DD783D500E5DCFC /* AlamofireDynamic */; };
@@ -109,6 +110,7 @@
 		22A93A8B2DDEFBD500D11F09 /* ScoreSphereTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreSphereTests.swift; sourceTree = "<group>"; };
 		22A93A962DDEFF8000D11F09 /* RealNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNetworkManager.swift; sourceTree = "<group>"; };
 		22A93A9C2DDF3E6A00D11F09 /* LeaguesPresenterMockedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LeaguesPresenterMockedTests.swift; path = ScoreSphereTests/LeaguesPresenterMockedTests.swift; sourceTree = "<group>"; };
+		22AE67932DE0BABC00B29CD1 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		22BDDA1D2DDA93F300D4BB28 /* TeamStanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStanding.swift; sourceTree = "<group>"; };
 		22FD70592DD8FD4C00E97F77 /* leagueDetailsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leagueDetailsCollectionViewController.swift; sourceTree = "<group>"; };
 		22FD705B2DD9008F00E97F77 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				22FD70602DD9019F00E97F77 /* UpcomingEventCell.swift */,
 				22FD70622DD901D900E97F77 /* LatestEventCell.swift */,
 				22FD70642DD9020000E97F77 /* TeamCell.swift */,
+				22AE67932DE0BABC00B29CD1 /* SectionHeaderView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				22A69EF22DDCF1D2002ADCF9 /* Repository.swift in Sources */,
 				22A7BEA42DD883BC006DA982 /* TeamPresente.swift in Sources */,
 				22FD705C2DD9008F00E97F77 /* Event.swift in Sources */,
+				22AE67942DE0BABC00B29CD1 /* SectionHeaderView.swift in Sources */,
 				22A93A972DDEFF8000D11F09 /* RealNetworkManager.swift in Sources */,
 				22A69EF42DDCF1ED002ADCF9 /* RepositoryImp.swift in Sources */,
 				225B46122DD7049200AFFC0A /* AppDelegate.swift in Sources */,

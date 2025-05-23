@@ -50,6 +50,17 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
 
     func createLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, _ in
+            
+            let headerSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .absolute(40)
+            )
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            
             switch sectionIndex {
             case 0:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(360), heightDimension: .absolute(160))
@@ -62,6 +73,8 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuous
                 section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+                section.boundarySupplementaryItems = [sectionHeader]
+
                 return section
 
             case 1:
@@ -69,11 +82,13 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(150))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(220))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 16)
+                section.boundarySupplementaryItems = [sectionHeader]
+
                 return section
 
             case 2:
@@ -87,6 +102,8 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuous
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 16)
+                section.boundarySupplementaryItems = [sectionHeader]
+
                 return section
 
             default:
@@ -156,7 +173,6 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Only allow selection in the Teams section
         guard indexPath.section == 2 else { return }
         
         let teams = presenter.getTeamStandings()
@@ -169,18 +185,40 @@ class LeagueDetailsCollectionViewController: UICollectionViewController, LeagueD
             
             let teamDetailsPresenter: TeamDetailsPresenterProtocol = TeamDetailsPresenter()
             
-            // Pass data to the presenter
             teamDetailsPresenter.teamId = selectedTeam.teamKey
             teamDetailsPresenter.sport = self.sportType
             
-            // Set the presenter to the view controller
             vc.presenter = teamDetailsPresenter
             
-            // The view will set itself as presenter's view in viewDidLoad of TeamDetailsViewController
-            
-            // Push the details view controller
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    
+    
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader else {
+            fatalError("Unsupported kind")
+        }
+
+        let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: "SectionHeader",
+            for: indexPath
+        ) as! SectionHeaderView
+
+        switch indexPath.section {
+        case 0: header.titleLabel.text = "Upcoming Events"
+        case 1: header.titleLabel.text = "Latest Events"
+        case 2: header.titleLabel.text = "Teams"
+        default: header.titleLabel.text = ""
+        }
+
+        return header
     }
 
 

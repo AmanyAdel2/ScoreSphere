@@ -13,7 +13,7 @@ class UpcomingEventCell: UICollectionViewCell {
     @IBOutlet weak var fTeamName: UILabel!
     @IBOutlet weak var sTeamName: UILabel!
     
-    @IBOutlet weak var data: UILabel!
+    @IBOutlet weak var date: UILabel!
     
     @IBOutlet weak var time: UILabel!
     
@@ -31,7 +31,7 @@ class UpcomingEventCell: UICollectionViewCell {
         func configure(with event: Event) {
                 fTeamName.text = event.homeTeam
                 sTeamName.text = event.awayTeam
-                data.text = event.date
+                date.text = event.date
                 time.text = event.time
 
                 if let homeURL = URL(string: event.homeTeamLogo ?? "") {

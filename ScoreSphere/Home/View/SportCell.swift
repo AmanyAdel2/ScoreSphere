@@ -13,7 +13,7 @@ class SportCell: UICollectionViewCell {
     @IBOutlet weak var sportName: UILabel!
    override func awakeFromNib() {
         contentView.layer.borderWidth = 2.0
-                contentView.layer.borderColor = UIColor.black.cgColor
+                contentView.layer.borderColor = UIColor.systemBlue.cgColor
                 contentView.layer.cornerRadius = 8.0
                 contentView.layer.masksToBounds = true
     }

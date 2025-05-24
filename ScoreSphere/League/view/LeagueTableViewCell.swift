@@ -16,7 +16,7 @@ class LeagueTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.layer.borderWidth = 2.0
-        self.contentView.layer.borderColor = UIColor.black.cgColor
+        self.contentView.layer.borderColor = UIColor.systemBlue.cgColor
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.layer.masksToBounds = true
         
@@ -28,10 +28,10 @@ class LeagueTableViewCell: UITableViewCell {
         leagueNameLabel.text = league.league_name
 
         if let logoURLString = league.league_logo, let url = URL(string: logoURLString) {
-            leagueLogoImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "trophy"))
+            leagueLogoImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "trophy"))
             
         } else {
-            leagueLogoImageView.image = UIImage(systemName: "trophy")
+            leagueLogoImageView.image = UIImage(named: "trophy")
         }
     }
     

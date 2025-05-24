@@ -21,6 +21,13 @@ class FavoriteTableViewCell: UITableViewCell {
         self.contentView.layer.borderColor = UIColor.systemBlue.cgColor
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.layer.masksToBounds = true
+      favoriteLeagueLogo.contentMode = .scaleAspectFit
+       favoriteLeagueLogo.layer.cornerRadius = 0
+        favoriteLeagueLogo.clipsToBounds = false
+   favoriteLeagueLogo.layer.cornerRadius = favoriteLeagueLogo.frame.size.width / 2
+       favoriteLeagueLogo.clipsToBounds = true
+    
+        
         // Initialization code
     }
 

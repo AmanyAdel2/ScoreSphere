@@ -20,6 +20,9 @@
 		226D9C362DDE7EBF00BF02E6 /* TeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9C352DDE7EBF00BF02E6 /* TeamDetails.swift */; };
 		226D9C392DDE81DA00BF02E6 /* TeamDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9C382DDE81DA00BF02E6 /* TeamDetailsPresenter.swift */; };
 		226D9C3B2DDE963F00BF02E6 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9C3A2DDE963F00BF02E6 /* PlayerTableViewCell.swift */; };
+		2276425E2DE233770019C386 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2276425D2DE233770019C386 /* SplashViewController.swift */; };
+		227642612DE238650019C386 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 227642602DE238650019C386 /* Lottie */; };
+		227642632DE23D750019C386 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 227642622DE23D750019C386 /* splash.json */; };
 		228388C82DDDE62C00C5610E /* LeagueDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228388C72DDDE62C00C5610E /* LeagueDetailsPresenter.swift */; };
 		228388CA2DDDE68600C5610E /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228388C92DDDE68600C5610E /* SportType.swift */; };
 		228BE5A62DD96FD8001095B3 /* League .swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BE5A52DD96FD8001095B3 /* League .swift */; };
@@ -86,6 +89,8 @@
 		226D9C352DDE7EBF00BF02E6 /* TeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetails.swift; sourceTree = "<group>"; };
 		226D9C382DDE81DA00BF02E6 /* TeamDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsPresenter.swift; sourceTree = "<group>"; };
 		226D9C3A2DDE963F00BF02E6 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
+		2276425D2DE233770019C386 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		227642622DE23D750019C386 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = splash.json; path = ../../splash.json; sourceTree = "<group>"; };
 		228388C72DDDE62C00C5610E /* LeagueDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailsPresenter.swift; sourceTree = "<group>"; };
 		228388C92DDDE68600C5610E /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
 		228BE5A52DD96FD8001095B3 /* League .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "League .swift"; sourceTree = "<group>"; };
@@ -128,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				227642612DE238650019C386 /* Lottie in Frameworks */,
 				22DC650A2DD783EE00E5DCFC /* SDWebImage in Frameworks */,
 				22DC65052DD783D500E5DCFC /* Alamofire in Frameworks */,
 				22DC650C2DD783EE00E5DCFC /* SDWebImageMapKit in Frameworks */,
@@ -213,6 +219,7 @@
 		225B46102DD7049200AFFC0A /* ScoreSphere */ = {
 			isa = PBXGroup;
 			children = (
+				227642622DE23D750019C386 /* splash.json */,
 				22A7BEA52DD88445006DA982 /* TeamCell */,
 				22327FCA2DE1246300E1304E /* League */,
 				226D9C2E2DDE740400BF02E6 /* TeamDetails */,
@@ -229,6 +236,7 @@
 				225B461A2DD7049200AFFC0A /* ScoreSphere.xcdatamodeld */,
 				22D4FE3A2DE1E3120052A579 /* OnBoarding.swift */,
 				22D4FE3C2DE1EA610052A579 /* PageThreeViewController.swift */,
+				2276425D2DE233770019C386 /* SplashViewController.swift */,
 			);
 			path = ScoreSphere;
 			sourceTree = "<group>";
@@ -414,6 +422,7 @@
 				22DC65062DD783D500E5DCFC /* AlamofireDynamic */,
 				22DC65092DD783EE00E5DCFC /* SDWebImage */,
 				22DC650B2DD783EE00E5DCFC /* SDWebImageMapKit */,
+				227642602DE238650019C386 /* Lottie */,
 			);
 			productName = ScoreSphere;
 			productReference = 225B460E2DD7049200AFFC0A /* ScoreSphere.app */;
@@ -468,6 +477,7 @@
 			packageReferences = (
 				22DC65032DD783D500E5DCFC /* XCRemoteSwiftPackageReference "Alamofire" */,
 				22DC65082DD783EE00E5DCFC /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2276425F2DE238650019C386 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 225B460F2DD7049200AFFC0A /* Products */;
 			projectDirPath = "";
@@ -486,6 +496,7 @@
 			files = (
 				225B46212DD7049400AFFC0A /* LaunchScreen.storyboard in Resources */,
 				225B461E2DD7049400AFFC0A /* Assets.xcassets in Resources */,
+				227642632DE23D750019C386 /* splash.json in Resources */,
 				225B46192DD7049200AFFC0A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +548,7 @@
 				22A69EF82DDD01D4002ADCF9 /* FavoriteLeaguesPresenter.swift in Sources */,
 				22A69EC42DDCE302002ADCF9 /* FavoriteTableViewCell.swift in Sources */,
 				225B46142DD7049200AFFC0A /* SceneDelegate.swift in Sources */,
+				2276425E2DE233770019C386 /* SplashViewController.swift in Sources */,
 				228388CA2DDDE68600C5610E /* SportType.swift in Sources */,
 				223ED0D42DD86C6900143C0A /* SportCell.swift in Sources */,
 				22A69EF02DDCEAA5002ADCF9 /* FavoriteLeagues+CoreDataProperties.swift in Sources */,
@@ -838,6 +850,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2276425F2DE238650019C386 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 		22DC65032DD783D500E5DCFC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -857,6 +877,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		227642602DE238650019C386 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2276425F2DE238650019C386 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		22DC65042DD783D500E5DCFC /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 22DC65032DD783D500E5DCFC /* XCRemoteSwiftPackageReference "Alamofire" */;

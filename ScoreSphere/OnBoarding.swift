@@ -33,9 +33,12 @@ class OnBoarding: UIPageViewController ,UIPageViewControllerDelegate,UIPageViewC
         super.viewDidLoad()
         self.delegate = self
            self.dataSource = self
-        let p1 = (self.storyboard?.instantiateViewController(identifier: "p1"))
+      //  let p0 = self.storyboard?.instantiateViewController(identifier: "p0")
+        
+        let p1 = self.storyboard?.instantiateViewController(identifier: "p1")
         let p2 = self.storyboard?.instantiateViewController(identifier: "p2")
         let p3 = self.storyboard?.instantiateViewController(identifier: "p3")
+        //arr.append(p0!)
         arr.append(p1!)
         arr.append(p2!)
         arr.append(p3!)

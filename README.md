@@ -15,13 +15,13 @@
   - **Unit Testing:** XCTest (Mocking included)
 
 ### 🏟️ Implemented by Suhaila Farahat:
-- **League Details**:
+- **League Details (fetch using Alamofire and displayed with custom `UICollectionViewCell`)**:
   - Upcoming events
   - Latest results
   - Participating teams
-- **Team Details**:
-  - Team logo
-  - Player information
+- **Team Details (fetch using Alamofire and displayed with custom `UITableViewCell`)**:
+  - Team logo and name
+  - Player informations
 
 ## 🛠️ Technologies Used
 - Swift & UIKit

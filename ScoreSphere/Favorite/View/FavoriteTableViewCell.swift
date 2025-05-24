@@ -18,7 +18,7 @@ class FavoriteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.layer.borderWidth = 2.0
-        self.contentView.layer.borderColor = UIColor.black.cgColor
+        self.contentView.layer.borderColor = UIColor.systemBlue.cgColor
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.layer.masksToBounds = true
         // Initialization code

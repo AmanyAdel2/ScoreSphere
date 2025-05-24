@@ -62,7 +62,9 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
 
             cell.favoriteLeagueName.text = favorite.league_name
             if let logoURL = favorite.league_logo, let url = URL(string: logoURL) {
-                cell.favoriteLeagueLogo.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
+                cell.favoriteLeagueLogo.sd_setImage(with: url, placeholderImage: UIImage(named: "trophy"))
+            }else {
+                cell.favoriteLeagueLogo.image = UIImage(named: "trophy")
             }
            
             
@@ -100,14 +102,21 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
     }
 
     func showFavoriteLeague(_ favorites: [FavoriteLeagues]) {
-        for fav in favorites {
-                print("league_name: \(fav.league_name ?? "nil"), sport_type: \(fav.sport_type ?? "nil")")
-            }
         DispatchQueue.main.async {
-               self.favorites = favorites
-               self.favTableView.reloadData()
-           }
+            self.favorites = favorites
+            self.favTableView.reloadData()
+            
+            if self.favorites.isEmpty {
+                self.setEmptyPlaceholder(
+                    image: UIImage(named: "image") ?? UIImage(systemName: "star"),
+                    message: "No favorite leagues yet."
+                )
+            } else {
+                self.restoreTableView()
+            }
+        }
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFavorite = favorites[indexPath.row]
 
@@ -127,6 +136,44 @@ class FavoriteViewController: UIViewController ,UITableViewDelegate,UITableViewD
             print("Failed to instantiate LeagueDetailsCollectionViewController")
         }
     }
+    func setEmptyPlaceholder(image: UIImage?, message: String) {
+        let placeholderView = UIView(frame: favTableView.bounds)
+
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        let label = UILabel()
+        label.text = message
+        label.textAlignment = .center
+        label.textColor = .systemBlue
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        placeholderView.addSubview(imageView)
+        placeholderView.addSubview(label)
+
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: placeholderView.centerYAnchor, constant: -40),
+            imageView.widthAnchor.constraint(equalToConstant: 120),
+            imageView.heightAnchor.constraint(equalToConstant: 120),
+
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
+            label.leadingAnchor.constraint(equalTo: placeholderView.leadingAnchor, constant: 20),
+            label.trailingAnchor.constraint(equalTo: placeholderView.trailingAnchor, constant: -20)
+        ])
+
+        favTableView.backgroundView = placeholderView
+        favTableView.separatorStyle = .none
+    }
+    func restoreTableView() {
+        favTableView.backgroundView = nil
+        favTableView.separatorStyle = .singleLine
+    }
+
+
 
     }
 

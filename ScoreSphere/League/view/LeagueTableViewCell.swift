@@ -19,6 +19,14 @@ class LeagueTableViewCell: UITableViewCell {
         self.contentView.layer.borderColor = UIColor.systemBlue.cgColor
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.layer.masksToBounds = true
+       
+
+            
+            leagueLogoImageView.contentMode = .scaleAspectFit
+            leagueLogoImageView.layer.cornerRadius = 0  
+            leagueLogoImageView.clipsToBounds = false
+        leagueLogoImageView.layer.cornerRadius = leagueLogoImageView.frame.size.width / 2
+            leagueLogoImageView.clipsToBounds = true
         
         
         

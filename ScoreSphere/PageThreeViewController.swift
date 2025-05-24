@@ -25,7 +25,7 @@ class PageThreeViewController: UIViewController {
             window.rootViewController = tabBarController
             window.makeKeyAndVisible()
             
-            //  animation
+            
             let transition = CATransition()
             transition.type = .fade
             transition.duration = 0.3

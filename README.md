@@ -14,7 +14,7 @@
     - Add/remove leagues to favorites using **CoreData**
   - **Unit Testing:** XCTest (Mocking included)
 
-### 🏟️ Implemented by Suhaila:
+### 🏟️ Implemented by Suhaila Farahat:
 - **League Details**:
   - Upcoming events
   - Latest results
